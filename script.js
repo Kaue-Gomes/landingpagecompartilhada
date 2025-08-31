@@ -1,36 +1,39 @@
 // script.js - Funcionalidades para a landing page da Nexus AI
 
 document.addEventListener('DOMContentLoaded', function () {
-    // Adiciona o menu hambúrguer
-    const mobileMenuToggle = document.createElement('div');
-    mobileMenuToggle.classList.add('mobile-menu-toggle');
-    mobileMenuToggle.innerHTML = '&#9776;'; // Ícone de hambúrguer
-
-    const navContainer = document.querySelector('nav .navbar-container');
-    navContainer.appendChild(mobileMenuToggle);
+    // Menu hambúrguer mobile
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const navLinks = document.getElementById('navLinks');
 
     // Adiciona funcionalidade ao menu hambúrguer
     mobileMenuToggle.addEventListener('click', function () {
-        const navLinks = document.querySelector('.nav-links');
         this.classList.toggle('active');
-
-        if (navLinks.style.display === 'flex') {
-            navLinks.style.display = 'none';
+        navLinks.classList.toggle('active');
+        
+        // Previne scroll do body quando menu está aberto
+        if (navLinks.classList.contains('active')) {
+            document.body.style.overflow = 'hidden';
         } else {
-            navLinks.style.display = 'flex';
-            navLinks.style.flexDirection = 'column';
-            navLinks.style.position = 'absolute';
-            navLinks.style.top = '80px';
-            navLinks.style.left = '0';
-            navLinks.style.width = '100%';
-            navLinks.style.backgroundColor = 'var(--dark-color)';
-            navLinks.style.padding = '20px';
-            navLinks.style.boxShadow = '0 10px 20px rgba(0, 0, 0, 0.2)';
+            document.body.style.overflow = 'auto';
+        }
+    });
 
-            const navItems = navLinks.querySelectorAll('li');
-            navItems.forEach(item => {
-                item.style.margin = '10px 0';
-            });
+    // Fecha o menu quando clica em um link
+    const navLinkItems = navLinks.querySelectorAll('a');
+    navLinkItems.forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenuToggle.classList.remove('active');
+            navLinks.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+    });
+
+    // Fecha o menu quando clica fora dele
+    document.addEventListener('click', function(event) {
+        if (!mobileMenuToggle.contains(event.target) && !navLinks.contains(event.target)) {
+            mobileMenuToggle.classList.remove('active');
+            navLinks.classList.remove('active');
+            document.body.style.overflow = 'auto';
         }
     });
 
@@ -260,12 +263,7 @@ pricingNumbers.forEach(priceElement => {
     });
 
     // Dark/Light theme toggle
-    const themeToggle = document.createElement('div');
-    themeToggle.classList.add('theme-toggle');
-    themeToggle.innerHTML = '🌙';
-    themeToggle.title = 'Alternar tema claro/escuro';
-
-    navContainer.appendChild(themeToggle);
+    const themeToggle = document.getElementById('themeToggle');
 
     themeToggle.addEventListener('click', function () {
         document.body.classList.toggle('light-theme');
@@ -306,30 +304,7 @@ pricingNumbers.forEach(priceElement => {
         }
     });
 
-    // Add CSS for theme toggle
-    const themeToggleStyle = document.createElement('style');
-    themeToggleStyle.textContent = `
-        .theme-toggle {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            background-color: var(--light-gray);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            margin-left: 15px;
-            font-size: 20px;
-            transition: all 0.3s ease;
-        }
 
-        .theme-toggle:hover {
-            background-color: var(--primary-color);
-            transform: rotate(360deg);
-        }
-    `;
-
-    document.head.appendChild(themeToggleStyle);
 
     // Add loading animation
     const loader = document.createElement('div');

@@ -1,277 +1,1094 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nexus AI - Inteligência Artificial de Nova Geração</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-</head>
-<body>
-    <!-- Navbar -->
-    <nav id="navbar">
-        <div class="navbar-container">
-            <a href="#" class="logo">Nexus<span>AI</span></a>
-            <ul class="nav-links">
-                <li><a href="#features">Recursos</a></li>
-                <li><a href="#pricing">Planos</a></li>
-                <li><a href="#testimonials">Depoimentos</a></li>
-                <li><a href="#contact">Contato</a></li>
-            </ul>
-            <a href="#pricing" class="cta-button">Comece Agora</a>
-        </div>
-    </nav>
+:root {
+    --primary-color: #00cc66;
+    --secondary-color: #007733;
+    --dark-color: #121212;
+    --gray-color: #1e1e1e;
+    --light-gray: #333333;
+    --text-color: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: var(--dark-color);
+    color: var(--text-color);
+    overflow-x: hidden;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* Navbar */
+#navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: rgba(18, 18, 18, 0.95);
+    z-index: 1000;
+    padding: 10px 0;
+}
+
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1200px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.navbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 25px;
+    cursor: pointer;
+    z-index: 1001;
+}
+
+.mobile-menu-toggle span {
+    height: 3px;
+    width: 100%;
+    background-color: var(--text-color);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+    transform-origin: center;
+}
+
+.mobile-menu-toggle.active span:nth-child(1) {
+    transform: translateY(11px) rotate(45deg);
+}
+
+.mobile-menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-menu-toggle.active span:nth-child(3) {
+    transform: translateY(-11px) rotate(-45deg);
+}
+
+@media (max-width: 768px) {
+    .mobile-menu-toggle {
+        display: flex;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 80px;
+        left: 0;
+        width: 100%;
+        background-color: var(--dark-color);
+        padding: 20px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+}
+
+.scrolled {
+    box-shadow: 0 5px 20px rgba(0, 204, 102, 0.1);
+}
+
+.logo {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-color);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+}
+
+.logo span {
+    color: var(--primary-color);
+}
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li {
+    margin-left: 30px;
+}
+
+.nav-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+    color: var(--primary-color);
+}
+
+.cta-button {
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+    color: var(--dark-color);
+    padding: 12px 28px;
+    border-radius: 30px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    text-decoration: none;
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+}
+
+.cta-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s;
+}
+
+.cta-button:hover::before {
+    left: 100%;
+}
+
+.cta-button:hover {
+    background: linear-gradient(135deg, var(--secondary-color), var(--primary-color));
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px rgba(0, 204, 102, 0.3);
+}
+
+/* Botão especial para "Experimente Grátis" */
+.hero .cta-button {
+    background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+    font-size: 18px;
+    padding: 15px 35px;
+    box-shadow: 0 8px 25px rgba(255, 107, 107, 0.3);
+}
+
+.hero .cta-button:hover {
+    background: linear-gradient(135deg, #ee5a24, #ff6b6b);
+    box-shadow: 0 12px 35px rgba(255, 107, 107, 0.4);
+}
+
+/* Botão especial para "Comece sua Jornada Hoje" */
+.cta .cta-button {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    font-size: 18px;
+    padding: 15px 35px;
+    box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
+
+.cta .cta-button:hover {
+    background: linear-gradient(135deg, #764ba2, #667eea);
+    box-shadow: 0 12px 35px rgba(102, 126, 234, 0.4);
+}
+
+/* Mobile Menu Toggle */
+.mobile-menu-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 25px;
+    cursor: pointer;
+}
+
+.mobile-menu-toggle span {
+    height: 3px;
+    width: 100%;
+    background-color: var(--text-color);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+.mobile-menu-toggle.active span:nth-child(1) {
+    transform: translateY(11px) rotate(45deg);
+}
+
+.mobile-menu-toggle.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-menu-toggle.active span:nth-child(3) {
+    transform: translateY(-11px) rotate(-45deg);
+}
+
+@media (max-width: 768px) {
+    .mobile-menu-toggle {
+        display: flex;
+    }
+
+    .nav-links {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background-color: var(--dark-color);
+        padding: 20px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+}
+
+/* Theme Toggle */
+.theme-toggle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--light-gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 18px;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+}
+
+.theme-toggle:hover {
+    background-color: var(--primary-color);
+    transform: scale(1.1);
+    border-color: var(--primary-color);
+    box-shadow: 0 4px 12px rgba(0, 204, 102, 0.3);
+}
+
+/* Hero Section */
+.hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    padding-top: 80px;
+}
+
+.hero-content {
+    width: 50%;
+    z-index: 1;
+}
+
+.hero h1 {
+    font-size: 54px;
+    line-height: 1.2;
+    margin-bottom: 24px;
+}
+
+.hero h1 span {
+    color: var(--primary-color);
+    position: relative;
+}
+
+.hero h1 span::after {
+    content: '';
+    position: absolute;
+    height: 30%;
+    width: 105%;
+    background-color: rgba(0, 204, 102, 0.1);
+    bottom: 0;
+    left: -2.5%;
+    z-index: -1;
+}
+
+.hero p {
+    font-size: 18px;
+    line-height: 1.6;
+    margin-bottom: 40px;
+    opacity: 0.9;
+}
+
+.hero-image {
+    position: absolute;
+    right: 0;
+    top: 0%;
+    transform: translateY(-50%);
+    width: 45%;
+    z-index: 0;
+    opacity: 0.9;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 15px;
+    }
     
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="container">
-            <div class="hero-content animate-fadeInUp">
-                <h1>O Futuro da IA <span>Chegou</span> com Nexus AI</h1>
-                <p>Uma plataforma de inteligência artificial revolucionária que potencializa sua criatividade, aumenta sua produtividade e transforma sua maneira de trabalhar.</p>
-                <a href="#pricing" class="cta-button">Experimente Grátis</a>
-            </div>
-            <img src="assets/nexus.png" alt="Nexus AI Interface" class="hero-image animate-float">
-        </div>
-    </section>
+    .hero {
+        flex-direction: column;
+        text-align: center;
+        padding-top: 100px;
+        height: auto;
+        padding-bottom: 60px;
+        min-height: auto;
+    }
+
+    .hero-content {
+        width: 100%;
+        margin-bottom: 40px;
+        padding: 0 10px;
+    }
+
+    .hero h1 {
+        font-size: 28px;
+        line-height: 1.3;
+        margin-bottom: 20px;
+    }
+
+    .hero p {
+        font-size: 16px;
+        margin-bottom: 30px;
+    }
+
+    .hero-image {
+        position: relative;
+        width: 90%;
+        max-width: 400px;
+        top: 0;
+        transform: none;
+        margin: 0 auto;
+    }
     
-    <!-- Features Section -->
-    <section class="features" id="features">
-        <div class="floating-element float-1"></div>
-        <div class="container">
-            <div class="section-title animate-fadeInUp">
-                <h2>Recursos Poderosos</h2>
-                <p>Descubra como a Nexus AI pode revolucionar sua forma de trabalhar com recursos inovadores e inteligentes.</p>
-            </div>
-            <div class="features-grid">
-                <div class="feature-card animate-fadeInUp delay-1">
-                    <div class="feature-icon">📝</div>
-                    <h3>Geração de Conteúdo</h3>
-                    <p>Crie textos de alta qualidade para blogs, anúncios, emails e muito mais com apenas um comando.</p>
-                </div>
-                <div class="feature-card animate-fadeInUp delay-2">
-                    <div class="feature-icon">🎨</div>
-                    <h3>Criação de Imagens</h3>
-                    <p>Transforme suas ideias em imagens impressionantes com nossa tecnologia de IA avançada.</p>
-                </div>
-                <div class="feature-card animate-fadeInUp delay-3">
-                    <div class="feature-icon">💻</div>
-                    <h3>Codificação Assistida</h3>
-                    <p>Desenvolva código mais rápido com sugestões inteligentes e solução de problemas em tempo real.</p>
-                </div>
-                <div class="feature-card animate-fadeInUp delay-1">
-                    <div class="feature-icon">🔍</div>
-                    <h3>Análise de Dados</h3>
-                    <p>Extraia insights valiosos de seus dados com nossos algoritmos de machine learning avançados.</p>
-                </div>
-                <div class="feature-card animate-fadeInUp delay-2">
-                    <div class="feature-icon">🔄</div>
-                    <h3>Automação de Processos</h3>
-                    <p>Automatize tarefas repetitivas e fluxos de trabalho para economizar tempo e aumentar a eficiência.</p>
-                </div>
-                <div class="feature-card animate-fadeInUp delay-3">
-                    <div class="feature-icon">🤝</div>
-                    <h3>Colaboração em Equipe</h3>
-                    <p>Trabalhe de forma colaborativa com sua equipe e a IA em tempo real para resultados melhores.</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    .cta-button {
+        padding: 12px 20px;
+        font-size: 14px;
+        width: auto;
+        display: inline-block;
+    }
+}
+
+/* Feature Section */
+.features {
+    padding: 100px 0;
+    background-color: var(--gray-color);
+    position: relative;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.section-title h2 {
+    font-size: 36px;
+    margin-bottom: 15px;
+}
+
+.section-title p {
+    font-size: 18px;
+    max-width: 600px;
+    margin: 0 auto;
+    opacity: 0.8;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+}
+
+.feature-card {
+    background-color: var(--light-gray);
+    border-radius: 10px;
+    padding: 30px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.feature-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 100%;
+    background-color: var(--primary-color);
+    transition: width 0.3s ease;
+}
+
+.feature-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.feature-card:hover::before {
+    width: 100%;
+    height: 4px;
+}
+
+.feature-icon {
+    font-size: 32px;
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+.feature-card h3 {
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+.feature-card p {
+    opacity: 0.8;
+    line-height: 1.6;
+}
+
+/* Pricing Section */
+.pricing {
+    padding: 100px 0;
+    background-color: var(--dark-color);
+    position: relative;
+}
+
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+    margin-top: 60px;
+}
+
+.pricing-card {
+    background-color: var(--light-gray);
+    border-radius: 10px;
+    padding: 40px 30px;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.popular-tag {
+    position: absolute;
+    top: 20px;
+    right: -30px;
+    background-color: var(--primary-color);
+    color: var(--dark-color);
+    padding: 5px 30px;
+    font-size: 14px;
+    font-weight: 600;
+    transform: rotate(45deg);
+}
+
+.pricing-header {
+    margin-bottom: 30px;
+}
+
+.pricing-name {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.pricing-price {
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 10px;
+}
+
+.pricing-price span {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.pricing-description {
+    opacity: 0.8;
+    margin-bottom: 30px;
+}
+
+.pricing-features {
+    list-style: none;
+    margin-bottom: 30px;
+    flex-grow: 1;
+}
+
+.pricing-features li {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.pricing-features li:last-child {
+    border-bottom: none;
+}
+
+.pricing-card:hover {
+    transform: translateY(-15px);
+    box-shadow: 0 20px 40px rgba(0, 204, 102, 0.15);
+}
+
+.pricing-card.popular {
+    background: linear-gradient(145deg, var(--light-gray), var(--gray-color));
+    border: 2px solid var(--primary-color);
+    transform: scale(1.05);
+    z-index: 1;
+}
+
+.pricing-card.popular:hover {
+    transform: scale(1.05) translateY(-15px);
+}
+
+/* Testimonials */
+.testimonials {
+    padding: 100px 0;
+    background-color: var(--gray-color);
+}
+
+.testimonial-slider {
+    margin-top: 60px;
+    padding: 20px 0;
+    position: relative;
+}
+
+.testimonial-slide {
+    background-color: var(--light-gray);
+    padding: 30px;
+    border-radius: 10px;
+    margin: 0 15px;
+    opacity: 0;
+    transition: all 0.5s ease;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    transform: translateX(100%);
+}
+
+.testimonial-slide.active {
+    opacity: 1;
+    transform: translateX(0);
+    position: relative;
+}
+
+.testimonial-slide.prev {
+    transform: translateX(-100%);
+}
+
+.testimonial-slide.next {
+    transform: translateX(100%);
+}
+
+.testimonial-content {
+    font-size: 18px;
+    line-height: 1.7;
+    margin-bottom: 20px;
+    position: relative;
+}
+
+.testimonial-content::before {
+    content: '"';
+    font-size: 72px;
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    color: var(--primary-color);
+    opacity: 0.2;
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+}
+
+.author-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 15px;
+    overflow: hidden;
+}
+
+.author-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.author-info h4 {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.author-info p {
+    font-size: 14px;
+    opacity: 0.7;
+}
+
+.slider-controls {
+    display: flex;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.slider-control {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid var(--primary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin: 0 10px;
+    transition: all 0.3s ease;
+}
+
+.slider-control:hover {
+    background-color: var(--primary-color);
+}
+
+.slider-control i {
+    color: var(--primary-color);
+    transition: all 0.3s ease;
+}
+
+.slider-control:hover i {
+    color: var(--dark-color);
+}
+
+/* Call to Action */
+.cta {
+    padding: 80px 0;
+    background-color: var(--dark-color);
+    text-align: center;
+}
+
+.cta h2 {
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.cta p {
+    font-size: 18px;
+    max-width: 700px;
+    margin: 0 auto 40px;
+    opacity: 0.9;
+}
+
+/* Floating Elements */
+.floating-element {
+    position: absolute;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    opacity: 0.1;
+    z-index: 0;
+}
+
+.float-1 {
+    width: 300px;
+    height: 300px;
+    top: -150px;
+    left: -150px;
+}
+
+.float-2 {
+    width: 200px;
+    height: 200px;
+    bottom: 50px;
+    right: -100px;
+}
+
+/* Footer */
+footer {
+    background-color: var(--gray-color);
+    padding: 60px 0 30px;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 40px;
+    margin-bottom: 50px;
+    align-items: start;
+}
+
+.footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer-legal {
+    display: flex;
+    gap: 20px;
+}
+
+.footer-legal a {
+    color: var(--text-color);
+    opacity: 0.7;
+    text-decoration: none;
+    font-size: 14px;
+    transition: opacity 0.3s ease;
+}
+
+.footer-legal a:hover {
+    opacity: 1;
+    color: var(--primary-color);
+}
+
+.footer-logo {
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--text-color);
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 20px;
+}
+
+/* Estilos para a seção de newsletter no footer */
+.footer-newsletter {
+    background-color:var(--dark-color);
+    padding: 25px;
+    border-radius: 8px;
+    margin-top: 20px;
+    width: 300px;
+   
+}
+
+.footer-newsletter h4 {
+    color: var(--text-color); /* Cor do título ajustada ao tema */
+}
+
+.footer-newsletter p {
+    color: var(--text-color); /* Cor do texto secundário ajustada ao tema */
+}
+
+.newsletter-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.newsletter-form input[type="email"] {
+    padding: 12px 15px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: var(--light-gray);
+    color: var(--text-color);
+    font-size: 14px;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+.newsletter-form input[type="email"]:focus {
+    outline: none;
+    border-color: #3f87f5;
+    box-shadow: 0 0 0 2px rgba(63, 135, 245, 0.2);
+}
+
+.newsletter-form input[type="email"]::placeholder {
+    color: var(--text-color); 
+}
+
+.newsletter-form button {
+    background: linear-gradient(90deg, #3f87f5, #6b5bf5);
+    color: #fff;
+    font-weight: 600;
+    border: none;
+    border-radius: 6px;
+    padding: 12px 20px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.newsletter-form button:hover {
+    background: linear-gradient(90deg, #2c75e0, #5a4ae0);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsividade para telas maiores */
+@media (min-width: 768px) {
+    .newsletter-form {
+        flex-direction: row;
+    }
     
-    <!-- Pricing Section -->
-    <section class="pricing" id="pricing">
-        <div class="floating-element float-2"></div>
-        <div class="container">
-            <div class="section-title animate-fadeInUp">
-                <h2>Planos e Preços</h2>
-                <p>Escolha o plano ideal para suas necessidades e comece a transformar seu trabalho hoje mesmo.</p>
-            </div>
-            <div class="pricing-grid">
-                <div class="pricing-card animate-fadeInUp delay-1">
-                    <div class="pricing-header">
-                        <h3 class="pricing-name">Iniciante</h3>
-                        <div class="pricing-price">R$49<span>/mês</span></div>
-                        <p class="pricing-description">Perfeito para uso pessoal e projetos pequenos</p>
-                    </div>
-                    <ul class="pricing-features">
-                        <li>100 créditos de IA por mês</li>
-                        <li>Geração de texto básica</li>
-                        <li>Criação de imagens (resolução média)</li>
-                        <li>Suporte por email</li>
-                        <li>1 usuário</li>
-                    </ul>
-                    <a href="#" class="cta-button">Começar Agora</a>
-                </div>
-                <div class="pricing-card popular animate-fadeInUp delay-2">
-                    <div class="popular-tag">Popular</div>
-                    <div class="pricing-header">
-                        <h3 class="pricing-name">Profissional</h3>
-                        <div class="pricing-price">R$149<span>/mês</span></div>
-                        <p class="pricing-description">Ideal para profissionais e pequenas empresas</p>
-                    </div>
-                    <ul class="pricing-features">
-                        <li>500 créditos de IA por mês</li>
-                        <li>Geração de texto avançada</li>
-                        <li>Criação de imagens (alta resolução)</li>
-                        <li>Codificação assistida</li>
-                        <li>Análise de dados básica</li>
-                        <li>Suporte prioritário</li>
-                        <li>3 usuários</li>
-                    </ul>
-                    <a href="#" class="cta-button">Começar Agora</a>
-                </div>
-                <div class="pricing-card animate-fadeInUp delay-3">
-                    <div class="pricing-header">
-                        <h3 class="pricing-name">Empresarial</h3>
-                        <div class="pricing-price">R$399<span>/mês</span></div>
-                        <p class="pricing-description">Perfeito para equipes e empresas em crescimento</p>
-                    </div>
-                    <ul class="pricing-features">
-                        <li>1500 créditos de IA por mês</li>
-                        <li>Todos os recursos premium</li>
-                        <li>API de acesso completo</li>
-                        <li>Automação de fluxos de trabalho</li>
-                        <li>Análise de dados avançada</li>
-                        <li>Suporte 24/7</li>
-                        <li>10 usuários</li>
-                        <li>Treinamento personalizado</li>
-                    </ul>
-                    <a href="#" class="cta-button">Contate Vendas</a>
-                </div>
-            </div>
-        </div>
-    </section>
+    .newsletter-form input[type="email"] {
+        flex: 1;
+    }
     
-    <!-- Testimonials Section -->
-    <section class="testimonials" id="testimonials">
-        <div class="container">
-            <div class="section-title animate-fadeInUp">
-                <h2>O Que Nossos Clientes Dizem</h2>
-                <p>Descubra como a Nexus AI está transformando empresas e profissionais ao redor do mundo.</p>
-            </div>
-            <div class="testimonial-slider">
-                <div class="testimonial-slide active">
-                    <div class="testimonial-content">
-                        A Nexus AI revolucionou nossa forma de criar conteúdo. Em apenas um mês, aumentamos nossa produção em 300% com qualidade ainda maior. Uma ferramenta indispensável para qualquer equipe de marketing.
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">
-                            <img src="assets/personfemale2.jpg" alt="Ana Silva">
-                        </div>
-                        <div class="author-info">
-                            <h4>Ana Silva</h4>
-                            <p>Diretora de Marketing, TechCorp</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-slide next">
-                    <div class="testimonial-content">
-                        Como desenvolvedor, a assistência de codificação da Nexus AI me ajuda a escrever código mais limpo e eficiente. Economizo horas todos os dias e posso focar nas partes criativas do meu trabalho.
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">
-                            <img src="assets/person1.jpg" alt="Rafael Mendes">
-                        </div>
-                        <div class="author-info">
-                            <h4>Rafael Mendes</h4>
-                            <p>Desenvolvedor Sênior, InnovateTech</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="testimonial-slide">
-                    <div class="testimonial-content">
-                        Implementamos a Nexus AI em nossa startup e os resultados foram imediatos. Nossa equipe pequena agora consegue competir com empresas muito maiores graças à automação e eficiência que ganhamos.
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">
-                            <img src="assets/personfemale1.jpg" alt="Carla Oliveira">
-                        </div>
-                        <div class="author-info">
-                            <h4>Carla Oliveira</h4>
-                            <p>CEO, StartGrow</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="slider-controls">
-                <div class="slider-control prev">←</div>
-                <div class="slider-control next">→</div>
-            </div>
-        </div>
-    </section>
+    .newsletter-form button {
+        width: auto;
+    }
+}
+
+.footer-logo span {
+    color: var(--primary-color);
+}
+
+.footer-text {
+    margin-bottom: 20px;
+    opacity: 0.8;
+    line-height: 1.6;
+    max-width: 300px;
+}
+
+.social-links {
+    display: flex;
+}
+
+.social-link {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background-color: var(--light-gray);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px;
+    transition: all 0.3s ease;
+}
+
+.social-link:hover {
+    background-color: var(--primary-color);
+    transform: translateY(-5px);
+}
+
+.social-link i {
+    color: var(--text-color);
+}
+
+.footer-links h4 {
+    font-size: 18px;
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+.footer-links h4::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 40px;
+    height: 2px;
+    background-color: var(--primary-color);
+}
+
+.footer-links ul {
+    list-style: none;
+}
+
+.footer-links li {
+    margin-bottom: 10px;
+}
+
+.footer-links a {
+    color: var(--text-color);
+    opacity: 0.8;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.footer-links a:hover {
+    opacity: 1;
+    color: var(--primary-color);
+    padding-left: 5px;
+}
+
+.copyright {
+    opacity: 0.7;
+    font-size: 14px;
+}
+
+/* Animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.05);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.animate-fadeInUp {
+    opacity: 0;
+    animation: fadeInUp 0.8s forwards;
+}
+
+.animate-float {
+    animation: float 6s infinite ease-in-out;
+}
+
+.animate-pulse {
+    animation: pulse 3s infinite ease-in-out;
+}
+
+.delay-1 {
+    animation-delay: 0.2s;
+}
+
+.delay-2 {
+    animation-delay: 0.4s;
+}
+
+.delay-3 {
+    animation-delay: 0.6s;
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .hero-content {
+        width: 60%;
+    }
     
-    <!-- Call to Action -->
-    <section class="cta" id="contact">
-        <div class="container">
-            <h2 class="animate-fadeInUp">Pronto para Transformar seu Trabalho?</h2>
-            <p class="animate-fadeInUp delay-1">Junte-se a milhares de profissionais e empresas que já estão usando a Nexus AI para alcançar resultados extraordinários.</p>
-            <a href="#pricing" class="cta-button animate-pulse">Comece sua Jornada Hoje</a>
-        </div>
-    </section>
+    .hero-image {
+        width: 40%;
+       
+    }
     
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-info">
-                    <a href="#" class="footer-logo">Nexus<span>AI</span></a>
-                    <p class="footer-text">Transformando o futuro do trabalho com inteligência artificial avançada e acessível para todos.</p>
-                    <div class="social-links">
-                        <a href="#" class="social-link"><i class="fab fa-facebook"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
-                    </div>
-                </div>
-                <div class="footer-links">
-                    <div class="footer-links-column">
-                        <h4>Produto</h4>
-                        <ul>
-                            <li><a href="#features">Recursos</a></li>
-                            <li><a href="#pricing">Planos</a></li>
-                            <li><a href="#">API</a></li>
-                            <li><a href="#">Integrações</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-links-column">
-                        <h4>Empresa</h4>
-                        <ul>
-                            <li><a href="#">Sobre Nós</a></li>
-                            <li><a href="#">Blog</a></li>
-                            <li><a href="#">Carreiras</a></li>
-                            <li><a href="#contact">Contato</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer-links-column">
-                        <h4>Suporte</h4>
-                        <ul>
-                            <li><a href="#">Centro de Ajuda</a></li>
-                            <li><a href="#">Documentação</a></li>
-                            <li><a href="#">Tutoriais</a></li>
-                            <li><a href="#">Status</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="footer-newsletter">
-                    <h4>Inscreva-se para Novidades</h4>
-                    <p>Receba dicas, atualizações e novidades sobre a Nexus AI.</p>
-                    <form class="newsletter-form">
-                        <input type="email" placeholder="Seu e-mail" required>
-                        <button type="submit">Inscrever</button>
-                    </form>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p class="copyright">&copy; 2025 Kaitek AI. Todos os direitos reservados.</p>
-                <div class="footer-legal">
-                    <a href="#">Termos de Uso</a>
-                    <a href="#">Política de Privacidade</a>
-                    <a href="#">Cookies</a>
-                </div>
-            </div>
-        </div>
-    </footer>
+    .features-grid, .pricing-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
     
-    <!-- Scripts -->
-    <script src="script.js"></script>
-</body>
-</html>
+    .footer-content {
+        grid-template-columns: 1fr 1fr;
+        row-gap: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    .features {
+        padding: 60px 0;
+    }
+    
+    .pricing {
+        padding: 60px 0;
+    }
+    
+    .testimonials {
+        padding: 60px 0;
+    }
+    
+    .cta {
+        padding: 60px 0;
+    }
+    
+    .section-title h2 {
+        font-size: 28px;
+    }
+    
+    .section-title p {
+        font-size: 16px;
+    }
+    
+    .features-grid, .pricing-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+    
+    .feature-card {
+        padding: 20px;
+    }
+    
+    .pricing-card {
+        padding: 30px 20px;
+    }
+    
+    .nav-links {
+        display: none;
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+        gap: 30px;
+    }
+    
+    .footer-links {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+    }
+    
+    .footer-links-column {
+        width: 100%;
+    }
+    
+    .footer-newsletter {
+        width: 100%;
+        max-width: 400px;
+        margin: 0 auto;
+    }
+    
+    .footer-links h4::after {
+        left: 50%;
+        transform: translateX(-50%);
+    }
+    
+    .social-links {
+        justify-content: center;
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+    }
+    
+    .footer-legal {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+}
